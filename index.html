@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahmud Saeful Rohman</title>
+  <style>
+    :root {
+      --bg1: #1b1b2f;
+      --bg2: #162447;
+      --gold: #f5c542;
+      --light: #f0d9b5;
+      --dark: #b58863;
+      --size: min(86vw, 400px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #eee;
+      /* Elemen desain: background gradasi bergerak */
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), #1f4068, var(--bg1));
+      background-size: 400% 400%;
+      animation: bgMove 18s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px 60px;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Bidak melayang di latar belakang */
+    .floating {
+      position: fixed;
+      bottom: -80px;
+      font-size: 48px;
+      opacity: .12;
+      pointer-events: none;
+      animation: floatUp linear infinite;
+    }
+    .floating:nth-child(1) { left: 8%;  animation-duration: 16s; }
+    .floating:nth-child(2) { left: 28%; animation-duration: 22s; animation-delay: 3s; font-size: 64px; }
+    .floating:nth-child(3) { left: 55%; animation-duration: 19s; animation-delay: 6s; }
+    .floating:nth-child(4) { left: 75%; animation-duration: 25s; animation-delay: 1s; font-size: 70px; }
+    .floating:nth-child(5) { left: 92%; animation-duration: 20s; animation-delay: 8s; }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) rotate(0deg); }
+      to   { transform: translateY(-115vh) rotate(360deg); }
+    }
+
+    header { text-align: center; max-width: 700px; position: relative; z-index: 1; }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(245, 197, 66, .45);
+      margin-bottom: 8px;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 8px rgba(245, 197, 66, .3); }
+      to   { text-shadow: 0 0 26px rgba(245, 197, 66, .8); }
+    }
+
+    .subtitle { color: #9fb3d9; margin-bottom: 28px; letter-spacing: 1px; }
+
+    /* ===== Papan catur ===== */
+    .board {
+      position: relative;
+      width: var(--size);
+      height: var(--size);
+      border: 8px solid #5c3d2e;
+      border-radius: 6px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .6);
+      background:
+        conic-gradient(var(--dark) 25%, var(--light) 0 50%, var(--dark) 0 75%, var(--light) 0)
+        0 0 / 25% 25%;
+      z-index: 1;
+    }
+
+    .piece {
+      position: absolute;
+      top: 0; left: 0;
+      width: calc(var(--size) / 8);
+      height: calc(var(--size) / 8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(var(--size) / 8 * .85);
+      line-height: 1;
+      color: #111;
+      text-shadow: 0 2px 3px rgba(0, 0, 0, .35);
+      user-select: none;
+    }
+
+    /* Kuda melompat membentuk rute huruf L, berulang terus */
+    .knight { animation: knightTour 12s ease-in-out infinite; z-index: 3; color: #fff;
+              text-shadow: 0 0 4px #000, 0 0 4px #000, 0 2px 6px rgba(0,0,0,.6); }
+    @keyframes knightTour {
+      0%     { transform: translate(100%, 700%); }
+      12.5%  { transform: translate(200%, 500%) scale(1.25); }
+      25%    { transform: translate(400%, 400%); }
+      37.5%  { transform: translate(500%, 200%) scale(1.25); }
+      50%    { transform: translate(300%, 100%); }
+      62.5%  { transform: translate(100%, 200%) scale(1.25); }
+      75%    { transform: translate(200%, 400%); }
+      87.5%  { transform: translate(300%, 600%) scale(1.25); }
+      100%   { transform: translate(100%, 700%); }
+    }
+
+    /* Benteng meluncur bolak-balik di baris atas */
+    .rook { animation: rookSlide 6s ease-in-out infinite alternate; }
+    @keyframes rookSlide {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(700%, 0); }
+    }
+
+    /* Ratu berdenyut */
+    .queen { transform: translate(300%, 300%); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 0 transparent); scale: 1; }
+      50%      { filter: drop-shadow(0 0 12px #ff3b3b); scale: 1.2; }
+    }
+
+    /* ===== Konten ===== */
+    main {
+      max-width: 700px;
+      margin-top: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      background: rgba(255, 255, 255, .06);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      line-height: 1.7;
+      backdrop-filter: blur(4px);
+    }
+
+    .panel { text-align: center; margin-top: 24px; }
+
+    button {
+      background: var(--gold);
+      color: #222;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 22px rgba(245, 197, 66, .5); }
+    button:active { transform: scale(.97); }
+
+    #hasil {
+      margin-top: 18px;
+      font-size: 1.05rem;
+      color: var(--gold);
+      min-height: 3em;
+    }
+
+    footer { margin-top: 36px; color: #7f8fb3; font-size: .85rem; position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- Bidak latar belakang -->
+  <span class="floating">♟</span>
+  <span class="floating">♜</span>
+  <span class="floating">♝</span>
+  <span class="floating">♚</span>
+  <span class="floating">♞</span>
+
+  <header>
+    <h1>♛ Catur: Seni Berpikir di Atas 64 Kotak ♛</h1>
+    <div class="subtitle">Halaman sederhana oleh Mahmud Saeful Rohman</div>
+  </header>
+
+  <div class="board" aria-label="Papan catur beranimasi">
+    <div class="piece rook">♜</div>
+    <div class="piece queen">♛</div>
+    <div class="piece knight">♞</div>
+  </div>
+
+  <main>
+    <p>
+      Catur adalah permainan strategi dua pemain yang dimainkan di papan berukuran 8×8 kotak.
+      Setiap pemain memegang 16 bidak: satu raja, satu ratu, dua benteng, dua gajah, dua kuda,
+      dan delapan pion. Tujuan utamanya sederhana, yaitu menyerang raja lawan hingga tidak
+      mampu lagi menghindar, kondisi yang disebut skakmat.
+    </p>
+
+    <p>
+      Setiap bidak punya cara bergerak yang unik. Benteng melaju lurus, gajah menyusuri diagonal,
+      dan ratu menggabungkan keduanya. Kuda adalah yang paling istimewa karena bergerak membentuk
+      huruf L dan bisa melompati bidak lain, seperti yang kamu lihat pada animasi di papan di atas.
+    </p>
+
+    <p>
+      Bermain catur melatih kesabaran, fokus, dan kemampuan merencanakan beberapa langkah ke depan.
+      Pola pikir ini mirip dengan pemrograman: memecah masalah besar menjadi langkah-langkah kecil
+      yang logis. Karena itu, banyak programmer yang juga menggemari catur.
+    </p>
+
+    <div class="panel">
+      <button id="btnLangkah">♞ Tampilkan Waktu &amp; Tips Catur</button>
+      <div id="hasil">Klik tombol untuk melihat tanggal, jam, dan tips catur hari ini!</div>
+    </div>
+  </main>
+
+  <footer>© 2026 Mahmud Saeful Rohman · Universitas Teknologi Bandung</footer>
+
+  <script>
+    const tips = [
+      "Kuasai bagian tengah papan lebih dulu.",
+      "Kembangkan kuda dan gajah sebelum menyerang dengan ratu.",
+      "Lakukan rokade lebih awal untuk mengamankan raja.",
+      "Jangan menggerakkan bidak yang sama berkali-kali di pembukaan.",
+      "Selalu periksa ancaman lawan sebelum melangkah.",
+      "Dalam endgame, raja justru menjadi bidak yang kuat."
+    ];
+
+    const tombol = document.getElementById("btnLangkah");
+    const hasil  = document.getElementById("hasil");
+
+    tombol.addEventListener("click", function () {
+      const sekarang = new Date();
+      const tanggal = sekarang.toLocaleDateString("id-ID", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric"
+      });
+      const jam = sekarang.toLocaleTimeString("id-ID");
+      const tip = tips[Math.floor(Math.random() * tips.length)];
+
+      // Ubah teks di halaman: tanggal/jam + tips acak
+      hasil.innerHTML = "📅 " + tanggal + " · ⏰ " + jam + "<br>♟ Tips: " + tip;
+    });
+  </script>
+</body>
+</html>
