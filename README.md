@@ -23,4 +23,9 @@ benteng yang meluncur, dan ratu yang berdenyut di atas papan catur CSS.
 
 
 ## Cara Menjalankan
-Buka file `index.html` di browser.
+LIVE DEMO : https://mahmudsaeful.github.io/Tugas-Elearning-24552011286/
+
+atau
+
+Buka file `index.html` di browser
+
