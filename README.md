@@ -1,8 +1,8 @@
 # Tugas Pemrograman Web 1 - Website Tema Catur
 
-**Nama:** Nama Mahasiswa
-**NIM:** 000000000
-**Kelas:** -
+**Nama:** Mahmud Saeful Rohman
+**NIM:** 24552011286
+**Kelas:** TIF 24 CNS E
 
 ## Deskripsi
 Website 1 halaman (satu file HTML) bertema catur, dengan animasi kuda melompat membentuk rute huruf L,
