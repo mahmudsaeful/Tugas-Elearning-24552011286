@@ -14,9 +14,13 @@ benteng yang meluncur, dan ratu yang berdenyut di atas papan catur CSS.
 
 ## Screenshot
 
-![Tampilan website](screenshot.png)
+![Tampilan website](screenshot1.png)
 
-> Simpan screenshot dari browser dengan nama `screenshot.png` di folder yang sama dengan README ini.
+![Tampilan website](screenshot2.png)
+
+![Tampilan website](screenshot3.png)
+
+
 
 ## Cara Menjalankan
 Buka file `index.html` di browser.
